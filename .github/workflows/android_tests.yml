@@ -38,6 +38,9 @@ jobs:
       - name: Run unit tests
         run: ./gradlew testDebugUnitTest --stacktrace
 
+      - name: Show build directory structure
+        run: find app/build -name "*.class" | head -20 || echo "No class files found"
+
       - name: Generate Jacoco coverage report
         run: ./gradlew jacocoTestReport
         continue-on-error: true
