@@ -14,7 +14,6 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -31,10 +30,12 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
     buildFeatures {
         compose = true
     }
@@ -54,20 +55,23 @@ tasks.register<JacocoReport>("jacocoTestReport") {
         "**/*ComposableSingletons*", "**/ui/theme/**"
     )
 
-classDirectories.setFrom(
-    fileTree("${buildDir}/tmp/kotlin-classes/debug") {
-        exclude(fileFilter)
-    },
-    fileTree("${buildDir}/intermediates/javac/debug") {
-        exclude(fileFilter)
-    }
-)
-sourceDirectories.setFrom("${projectDir}/src/main/java")
-executionData.setFrom(
-    fileTree("${buildDir}") {
-        include("**/*.exec", "**/*.ec")
-    }
-)
+    classDirectories.setFrom(
+        fileTree("${buildDir}/tmp/kotlin-classes/debug") {
+            exclude(fileFilter)
+        },
+        fileTree("${buildDir}/intermediates/javac/debug") {
+            exclude(fileFilter)
+        }
+    )
+
+    sourceDirectories.setFrom("${projectDir}/src/main/java")
+
+    executionData.setFrom(
+        fileTree("${buildDir}") {
+            include("**/*.exec", "**/*.ec")
+        }
+    )
+}
 
 dependencies {
     implementation(libs.androidx.core.ktx)
