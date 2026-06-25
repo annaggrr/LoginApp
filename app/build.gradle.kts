@@ -56,13 +56,10 @@ tasks.register<JacocoReport>("jacocoTestReport") {
     )
 
     classDirectories.setFrom(
-        fileTree("${buildDir}/tmp/kotlin-classes/debug") {
-            exclude(fileFilter)
-        },
-        fileTree("${buildDir}/intermediates/javac/debug") {
-            exclude(fileFilter)
-        }
-    )
+            fileTree("${buildDir}/intermediates/classes/debug/jacocoDebug/dirs") {
+                exclude(fileFilter)
+            }
+        )
 
     sourceDirectories.setFrom("${projectDir}/src/main/java")
 
