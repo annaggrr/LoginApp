@@ -54,22 +54,20 @@ tasks.register<JacocoReport>("jacocoTestReport") {
         "**/*ComposableSingletons*", "**/ui/theme/**"
     )
 
-    classDirectories.setFrom(
-        fileTree("${projectDir}/build/tmp/kotlin-classes/debug") {
-            exclude(fileFilter)
-        },
-        fileTree("${projectDir}/build/intermediates/javac/debug") {
-            exclude(fileFilter)
-        }
-    )
-
-    sourceDirectories.setFrom("${projectDir}/src/main/java")
-    executionData.setFrom(
-        fileTree("${projectDir}/build") {
-            include("**/*.exec", "**/*.ec")
-        }
-    )
-}
+classDirectories.setFrom(
+    fileTree("${buildDir}/tmp/kotlin-classes/debug") {
+        exclude(fileFilter)
+    },
+    fileTree("${buildDir}/intermediates/javac/debug") {
+        exclude(fileFilter)
+    }
+)
+sourceDirectories.setFrom("${projectDir}/src/main/java")
+executionData.setFrom(
+    fileTree("${buildDir}") {
+        include("**/*.exec", "**/*.ec")
+    }
+)
 
 dependencies {
     implementation(libs.androidx.core.ktx)
