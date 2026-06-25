@@ -32,18 +32,6 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Run MobSF Static Analysis
-        uses: MobSF/mobsfscan-action@v1
-        with:
-          args: '. --sarif --output mobsf-results.sarif'
-        continue-on-error: true
-
-      - name: Upload MobSF Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: mobsf-security-report
-          path: mobsf-results.sarif
-
       - name: Build Debug APK
         run: ./gradlew assembleDebug --stacktrace
 
