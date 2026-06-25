@@ -88,9 +88,12 @@ jobs:
 
       - name: Run instrumented tests on emulator
         uses: reactivecircus/android-emulator-runner@v2
+        timeout-minutes: 30
         with:
           api-level: 34
           target: default
           arch: x86_64
           profile: pixel_6
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: true
           script: ./gradlew connectedDebugAndroidTest --stacktrace
